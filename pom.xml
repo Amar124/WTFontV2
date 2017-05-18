@@ -20,12 +20,6 @@
             <artifactId>xml-path</artifactId>
             <version>3.0.2</version>
         </dependency>
-		
-		<dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>xml-path</artifactId>
-            <version>3.0.2</version>
-        </dependency>
   </dependencies>
 </project>
 
