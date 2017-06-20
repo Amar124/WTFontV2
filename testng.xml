@@ -3,8 +3,7 @@
 <suite name="DemoSuite">
   <test name="FirstAPITaskManagerTest">
   	<classes>
-  		<class name="banner.BannerTest"></class>
-  		<class name="hotnew.HotNewTest"></class>
+  		<class name="authenticate.AuthenticationTest"></class>
   	</classes>
   </test> 
 </suite>
