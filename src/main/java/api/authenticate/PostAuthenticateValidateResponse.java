@@ -21,10 +21,9 @@ public class PostAuthenticateValidateResponse extends Task<PostAuthenticateTaskM
     public void perform(TaskManager<PostAuthenticateTaskManager> taskManager) {
         try{
             startTimer();
-            //TODO - remove hardcoded 409 response
             objMTLogger.log(LogStatus.INFO, "API hit successful, will validate the response now");
 
-            taskManager.getRestDriver().getobjMTResponseBuilder().setStatusCode(HttpStatus.SC_CREATED);  // 409
+            taskManager.getRestDriver().getobjMTResponseBuilder().setStatusCode(HttpStatus.SC_OK);
             taskManager.getRestDriver().createExpectedResponse(taskManager.getRestDriver().getobjMTResponseBuilder());
             taskManager.getRestDriver().validateResponse();
             setTaskSuccessfull();

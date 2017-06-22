@@ -17,19 +17,21 @@ public class PostAuthenticateTaskManager extends TaskManager<PostAuthenticateTas
 	PostAuthenticateCreateRequestTask createRequest;
 	PostAuthenticateExecuteRequestTask executeRequest;
 	PostAuthenticateValidateResponse validateResponse;
+	Map<String, String> testData;
 	MTLogger mtLogger;
 
-	public PostAuthenticateTaskManager(Map<String,String> map,MTLogger mtLogger)
+	public PostAuthenticateTaskManager(Map<String,String> testData,MTLogger mtLogger)
 	{
-		try {
-			baseUri = PropertiesManager.getProperty("baseURI");
-			this.mtLogger=mtLogger;
+		try
+		{
+			this.baseUri = PropertiesManager.getProperty("baseURI");
+			this.mtLogger= mtLogger;
+			this.testData = testData;
 
-			this.mtLogger.log(LogStatus.INFO, "Request Json is: " + map.get("json").toString());
-			System.out.println("Request Json is: " + map.get("json").toString());
 			JSONSerializer objJsonSerializer = new JSONSerializer();
+
 			// converting json to pojo using apiart utils
-			Op objBannerRequest = objJsonSerializer.stringToPOJO(map.get("json").toString(), Op.class);
+			Op objBannerRequest = objJsonSerializer.stringToPOJO(testData.get("json").toString(), Op.class);
 
 			createRequest = new PostAuthenticateCreateRequestTask(baseUri, objBannerRequest,this.mtLogger);
 			executeRequest = new PostAuthenticateExecuteRequestTask(this.mtLogger);
@@ -42,8 +44,15 @@ public class PostAuthenticateTaskManager extends TaskManager<PostAuthenticateTas
 	
 	public String perform()
 	{
+		//Adding tasks in addTask method of TaskManager
 		addTask(createRequest);
+		addTask(executeRequest);
+		addTask(validateResponse);
+
+		//Executing the added tasks
 		execute();
+
+		//Returning the status of the tasks
 		return getStatus();
 	}
 }

@@ -7,14 +7,13 @@ import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonPropertyOrder({ "__v", "updatedAt", "createdAt", "type", "backgroundColor", "createdBy", "image",
-		"fontFamilyDetails", "_id", "collections", "isDeleted" })
+@JsonPropertyOrder({ "token", "updatedAt" })
 public class Op {
 
 	@JsonIgnore
 	private Integer v;
-	@JsonProperty("updatedAt")
-	private String updatedAt;
+	@JsonProperty("token")
+	private String token;
 	@JsonIgnore
 	private String createdAt;
 	@JsonProperty("type")
@@ -40,16 +39,6 @@ public class Op {
 	@JsonProperty("__v")
 	public void setV(Integer v) {
 		this.v = v;
-	}
-
-	@JsonProperty("updatedAt")
-	public String getUpdatedAt() {
-		return updatedAt;
-	}
-
-	@JsonProperty("updatedAt")
-	public void setUpdatedAt(String updatedAt) {
-		this.updatedAt = updatedAt;
 	}
 
 	@JsonProperty("createdAt")
